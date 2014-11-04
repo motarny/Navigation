@@ -26,3 +26,6 @@ $path = '';
 $actionIndex = 0;
 include_once 'template.phtml';
 
+
+
+dalsze prace
