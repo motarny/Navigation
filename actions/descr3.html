@@ -1,0 +1,21 @@
+<h2>
+	<small>Akcja 3</small> Dodanie nowych stron do nawigacji - sposób 3
+</h2>
+<blockquote>
+Tworzone są nowe obiekty NavigationPage a następnie wykonywana jest metoda NavigationPage::addToNavigation($navigation).<br>
+Metoda addToNavigation() deleguje działanie do Navigation::addNavigationPage().<br>
+Oba sposoby można stosować zamiennie, w zależności od okoliczności/upodobania.
+</blockquote>
+
+
+<pre>
+    $newPage = new NavigationPage(
+        array(
+                'id' => 'firma_sie_360',
+                'parentId' => 'firma_siedziba',
+                'label' => 'Panoramy 360 stopni',
+                'url' => '#'
+        ));
+
+    $newPage->addToNavigation($navigation);
+</pre>

@@ -1,0 +1,50 @@
+<h2>
+	<small>Akcja 1</small> Dodanie nowych stron do nawigacji - sposób 1
+</h2>
+<blockquote>
+    Akcja tworzy kilka obiektów klasy NavigationPage a następnie dodaje je do nawigacji.
+</blockquote>
+
+
+<pre>
+    // Tworzymy obiekt NavigationPage...
+    $newPage = new NavigationPage(
+        array(
+                'id' => 'firma',
+                'parentId' => 'root',
+                'label' => 'O firmie',
+                'url' => '#'
+        ));
+    
+    // ..i dodajemy go do nawigacji używając metody w klasie Navigation
+    $navigation->addNavigationPage($newPage);
+
+    
+    // Powtarzamy kilka razy...
+    $newPage2 = new NavigationPage(
+        array(
+                'id' => 'firma_historia',
+                'parentId' => 'firma',
+                'label' => 'Historia firmy',
+                'url' => '#'
+        ));
+    $navigation->addNavigationPage($newPage2);
+
+    $newPage3 = new NavigationPage(
+        array(
+                'id' => 'firma_zarzad',
+                'parentId' => 'firma',
+                'label' => 'Zarząd firmy',
+                'url' => '#'
+        ));
+    $navigation->addNavigationPage($newPage3);
+
+    $newPage4 = new NavigationPage(
+        array(
+                'id' => 'firma_zarzad_spr',
+                'parentId' => 'firma_zarzad',
+                'label' => 'Sprawozdania zarządu',
+                'url' => '#'
+        ));
+    $navigation->addNavigationPage($newPage4);
+</pre>

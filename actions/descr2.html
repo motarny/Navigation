@@ -1,0 +1,17 @@
+<h2>
+	<small>Akcja 2</small> Dodawanie nowych stron do nawigacji - sposób 2
+</h2>
+<blockquote>
+Tworząc nowy obiekt NavigationPage, podajemy mu w konstruktorze oprócz właściwości także opcjonalny obiekt klasy Navigation.
+</blockquote>
+
+
+<pre>
+    $newPage = new NavigationPage(
+        array(
+                'id' => 'firma_siedziba',
+                'parentId' => 'firma',
+                'label' => 'Prezentacja siedziby',
+                'url' => '#'
+        ), $navigation);  // $navigation jest obiektem klasy Navigation, na którym pracujemy
+</pre>

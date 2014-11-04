@@ -9,6 +9,8 @@
 interface INavigation
 {
 
+    public function importArray($navigationSourceArray);
+    
     public function render ($options);
 
     public function getNavigation ();

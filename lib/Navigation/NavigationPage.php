@@ -84,6 +84,9 @@ class NavigationPage implements INavigationPage
     public function setId ($val)
     {
         $this->_id = $val;
+        
+        // TODO Jeśli jest przypisana nawigacja, to powinien zmienić wszystkim potomom zmienić id rodzica
+        
         return $this;
     }
 

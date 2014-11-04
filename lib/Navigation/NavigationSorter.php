@@ -73,7 +73,7 @@ class NavigationSorter
     public function insertBefore (INavigationPage $movigPage, 
             INavigationPage $refererPage)
     {
-        $result = $this->movingTool($movigPage, $refererPage, - 1);
+        $result = $this->movingTool($movigPage, $refererPage, - 50);
         if (! $result) {
             throw new Exception(
                     'Wskazane NavigationPages muszą należeć do jednego rodzica!');
@@ -94,7 +94,7 @@ class NavigationSorter
     public function insertAfter (INavigationPage $movigPage, 
             INavigationPage $refererPage)
     {
-        $result = $this->movingTool($movigPage, $refererPage, 1);
+        $result = $this->movingTool($movigPage, $refererPage, 50);
         if (! $result) {
             throw new Exception(
                     'Wskazane NavigationPages muszą należeć do jednego rodzica!');

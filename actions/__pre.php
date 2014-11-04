@@ -1,10 +1,12 @@
 <?php
 
 	define ( 'BR', '<br>' );
+
+	$maxAction = 7;
 	
 	$unlimitedLevels = false;
 	function __autoload($class_name) {
-		include_once '..' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . $class_name . '.php';
+		include_once '..' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'Navigation' . DIRECTORY_SEPARATOR . $class_name . '.php';
 	}
 	
 	$navigationSourceFile = '..' . DIRECTORY_SEPARATOR . 'navigationSource.php';

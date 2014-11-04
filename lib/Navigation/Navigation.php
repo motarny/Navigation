@@ -30,8 +30,6 @@ class Navigation implements INavigation
 
     /**
      * Do konstruktora przekazywana jest tablica zawierająca elementy nawigacji.
-     * Na podstawie przekazanej tablicy, generowana jest wewnętrzna tablica
-     * zawierająca obiekty NavigationPage.
      *
      * @param array $navigationSourceArray
      *            Tablica z elementami nawigacji
@@ -42,7 +40,19 @@ class Navigation implements INavigation
     function __construct ($navigationSourceArray, $unlimitedLevels = false)
     {
         $this->setUnlimitedLevels($unlimitedLevels);
-        
+        $this->importArray($navigationSourceArray);
+    }
+
+    /**
+     * Na podstawie przekazanej tablicy, generowana jest wewnętrzna tablica
+     * zawierająca obiekty NavigationPage.
+     *
+     * @param array $navigationSourceArray
+     *            Tablica z elementami nawigacji
+     */
+    public function importArray ($navigationSourceArray)
+    {
+        // TODO Kontrola poprawności danych. Np. że id nie może być taki jak parentid (bo zawisa :)
         foreach ($navigationSourceArray as $pageId => $pageData) {
             $navigationPage = new NavigationPage(
                     array(

@@ -1,0 +1,27 @@
+<h2>
+	<small>Akcja 4</small> Dodanie nowych stron do nawigacji - sposób 4
+</h2>
+<blockquote>
+Nowe podstrony można dodawać także bez podawania ID. Zostanie on utworzony automatycznie a obiekt NavigationPage zwrócony.<br>
+Zwrócony obiekt NavigationPage będzie już zawierał ustawioną właściwość ID.
+</blockquote>
+
+
+<pre>
+    $newPage = new NavigationPage(
+        array(
+                'parentId' => 'firma_siedziba',
+                'label' => 'Galeria foto',
+                'url' => '#'
+        ));
+
+    $newPage = $newPage->addToNavigation($navigation);
+
+    // Tworzymy i dodajemy nową stronę - sposób z przekazaniem nawigacji w konstruktorze
+    $newPage2 = new NavigationPage(
+        array(
+                'parentId' => $newPage->getId(),
+                'label' => 'Nasi pracownicy',
+                'url' => '#'
+        ), $navigation);
+</pre>

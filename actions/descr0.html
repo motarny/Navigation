@@ -1,0 +1,15 @@
+<h2>
+	<small>Akcja 0</small> Stworzenie nowej nawigacji
+</h2>
+<blockquote>
+	Tworzy nowy obiekt Navigation. <br> W konstruktorze przekazywana
+	jest tablica ze wstępnie skonfigurowaną nawigacją.
+</blockquote>
+
+
+<pre>
+    $navigationSourceFile = "navigationSource.php";
+    $navigation = new Navigation(include $navigationSourceFile, false); // true = wyłączenie limitera zagnieżdżeń  
+    
+    $navigationOutput = $navigation->render();
+</pre>
