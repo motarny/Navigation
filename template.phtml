@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Navigation class example</title>
+
+<link href="<?= $path; ?>css/bootstrap.css" rel="stylesheet">
+<link href="<?= $path; ?>css/navigation.css" rel="stylesheet">
+<link href="<?= $path; ?>css/topmenu.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+	<header>
+
+		<div class="mainMenu" id="mainMenuContainer">
+    		<?= $navigationOutput; ?>
+    	</div>
+
+	</header>
+
+
+	<div class="content container">
+
+		<div class="row">
+
+			<div class="navigationStructure col-md-4 col-lg-4">
+				<label>Nieostylowana struktura nawigacji</label>
+				<div class="content">
+	    			<?= $navigationOutput; ?>
+    				
+    			</div>
+			</div>
+
+			<div class="navigationSource col-md-8 col-lg-8">
+				<label>Tablica źródła nawigacji wygenerowana Navigation::getNavigation oraz przyjmowana w konstruktorze</label>
+				<div class="content" style="overflow: auto;">
+    				<?php
+								$navigationSource = $navigation->getNavigation ();
+								echo nl2br ( str_replace ( " ", "&nbsp;", $navigationSource ) );
+								?>
+    			</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="actionsContainer">
+				<label>Akcje demonstracyjne</label>
+				<div class="action" actionid="0">
+					<label>Akcja 0 - wczytaj nawigację z tablicy i wyrenderuj navigację do zmiennej</label>
+					<div class="content">
+<pre>
+    $unlimitedLevels = false;
+    $navigationSourceFile = "navigationSource.php";
+    $navigation = new Navigation(include $navigationSourceFile, $unlimitedLevels);	
+    
+    $renderOptions = array(
+    	'rootContainerCssClass' => 'root',
+    	'containerCssClass'     => 'ulclass',
+    );
+    
+    $navigationOutput = $navigation->render($renderOptions);
+</pre>
+					</div>
+				</div>
+				
+				<div class="action" actionid="1">
+					<label>Akcja 1 - dodawanie nowych stron do nawigacji - sposób 1</label>
+					<div class="content">
+						Akcja tworzy kilka obiektów klasy NavigationPage a następnie dodaje je do nawigacji.
+<pre>
+	$newPage = new NavigationPage( array (
+		'id'        => 'firma',
+		'parentId'  => 'root',
+		'label'     => 'O firmie',
+		'url'       => '#'
+		) );
+	$navigation->addNavigationPage($newPage);
+	
+	$newPage2 = new NavigationPage( array (
+		'id'        => 'firma_historia',
+		'parentId'  => 'firma',
+		'label'     => 'Historia firmy',
+		'url'       => '#'
+		) );
+	$navigation->addNavigationPage($newPage2);
+	
+	$newPage3 = new NavigationPage( array (
+		'id'        => 'firma_zarzad',
+		'parentId'  => 'firma',
+		'label'     => 'Zarząd firmy',
+		'url'       => '#'
+		) );
+	$navigation->addNavigationPage($newPage3);
+	
+	$newPage4 = new NavigationPage( array (
+		'id'        => 'firma_zarzad_spr',
+		'parentId'  => 'firma_zarzad',
+		'label'     => 'Sprawozdania zarządu',
+		'url'       => '#'
+		) );
+	$navigation->addNavigationPage($newPage4);
+	
+</pre>
+					</div>
+				</div>
+				
+
+				<div class="action" actionid="2">
+					<label>Akcja 2 - dodawanie nowych stron do nawigacji - sposób 2</label>
+					<div class="content">
+						Tworzone są nowe obiekty NavigationPage i podawany jest w konstruktorze obiekt klasy Navigation
+<pre>
+	$newPage = new NavigationPage( array (
+		'id'        => 'firma_siedziba',
+		'parentId'  => 'firma',
+		'label'     => 'Prezentacja siedziby',
+		'url'       => '#'
+		),
+		$navigation
+		);
+	
+</pre>
+					</div>
+				</div>
+				
+				<div class="action" actionid="3">
+					<label>Akcja 3 - dodawanie nowych stron do nawigacji - sposób 3</label>
+					<div class="content">
+						Tworzone są nowe obiekty NavigationPage i następnie wykonywana jest metoda NavigationPage::addToNavigation($navigation)
+<pre>
+	$newPage = new NavigationPage( array (
+		'id'        => 'firma_sie_360',
+		'parentId'  => 'firma_siedziba',
+		'label'     => 'Panoramy 360 stopni',
+		'url'       => '#'
+		) );
+		
+	$newPage->addToNavigation($navigation);
+	
+</pre>
+					</div>
+				</div>				
+				
+				<div class="action" actionid="4">
+					<label>Akcja 4 - dodawanie nowych stron do nawigacji - sposób 4</label>
+					<div class="content">
+						Nowe podstrony można dodawać także bez podawania ID. Zostanie on utworzony automatycznie a obiekt NavigationPage zwrócony.
+<pre>
+	$newPage = new NavigationPage( array (
+		'parentId'  => 'firma_siedziba',
+		'label'     => 'Galeria foto',
+		'url'       => '#'
+		) );
+		
+	$newNavigationPage = $newPage->addToNavigation($navigation);
+
+	// przy tworzeniu nowej strony, wykorzystaj id poprzednio utworzonej	
+	$newPage2 = new NavigationPage( array (
+		'parentId'  => $newNavigationPage->getId(),
+		'label'     => 'Nasi pracownicy',
+		'url'       => '#'
+		) );
+		
+	$newNavigationPage2 = $navigation->addNavigationPage($newPage2); 	
+	
+</pre>
+					</div>
+				</div>
+				
+
+				<div class="action" actionid="4">
+					<label>Akcja 5 - przenoszenie podstron ze strukturą - sposób 1</label>
+					<div class="content">
+						Przenoszenie w strukturze ustawiając obiektowi NavigationPage właściwość _parentId
+<pre>
+
+	
+</pre>
+					</div>
+				</div>				
+				
+				
+			</div>
+
+
+		</div>
+
+	</div>
+
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="<?= $path; ?>js/bootstrap.min.js"></script>
+
+
+	<script>
+
+		$(function()
+				{
+$(".action[actionid=<?= $actionIndex+1 ?>]").show();
+				}
+		);
+
+
+	</script>
+
+
+</body>
+</html>
+

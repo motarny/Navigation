@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+
+
+
+#managerContainer ul
+{
+	list-style:none;
+	background:#ffffff;
+	padding:0;
+}
+
+#managerContainer li
+{
+	padding-left:20px;
+	padding-top:3px;
+	padding-bottom:3px;
+	display:block;
+	background:#f0f0f0;
+	margin:1px;
+}
+
