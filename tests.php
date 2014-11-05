@@ -1,6 +1,5 @@
 <?php
-
-
+// TODO do usunięcia
 define('BR', '<br>');
 
 // resetujemy plik z tablicą nawigacji na startowy
