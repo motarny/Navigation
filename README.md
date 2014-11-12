@@ -1,6 +1,7 @@
 Navigation
 ==========
 
-Zadanie testowe polegające na utworzeniu funkcjonalnej klasy Navigation.
+Funkcjonalnej klasy Navigation.
+Parę 'todo's', ale działa.
 
 ..
